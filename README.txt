@@ -1,3 +1,6 @@
+inspired by:  
+[Lil's Log](https://lilianweng.github.io/)  
+
 config参考文档：
 https://github.com/adityatelange/hugo-PaperMod/wiki/Features
 https://github.com/adityatelange/hugo-PaperMod/wiki/Installation#getting-started-  
