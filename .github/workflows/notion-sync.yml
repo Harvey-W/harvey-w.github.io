@@ -36,6 +36,7 @@ jobs:
           content-folder: ./content/posts
           images-folder: ./static/img
           images-link: /img
+          archetype-file: ./archetypes/blog.md
           property-description: "Description"
           property-tags: "Tags"
           property-categories: "Categories"
