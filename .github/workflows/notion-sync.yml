@@ -1,0 +1,62 @@
+name: Sync Posts from Notion
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"   # 每12小时自动运行
+  workflow_dispatch:          # 手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  sync-notion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Verify Notion secret
+        run: |
+          if [ -z "${NOTION_SECRET}" ]; then
+            echo "❌ NOTION_SECRET is missing"
+            exit 1
+          else
+            echo "✅ NOTION_SECRET detected"
+          fi
+        env:
+          NOTION_SECRET: ${{ secrets.NOTION_SECRET }}
+
+      - name: Sync from Notion database
+        uses: Harvey-W/notion-blog@master
+        with:
+          database-id: '28fd66f900a880469866f3c2ce540b14'
+          content-folder: ./content/posts
+          images-folder: ./static/img
+          images-link: /img
+          property-description: "Description"
+          property-tags: "Tags"
+          property-categories: "Categories"
+          filter-prop: 'Status'
+          filter-value: "Finished,Published"
+          published-value: 'Published'
+          use-date-for-filename: false
+          use-shortcodes: true
+        env:
+          NOTION_SECRET: ${{ secrets.NOTION_SECRET }}
+          NOTION_TOKEN: ${{ secrets.NOTION_SECRET }}
+
+      - name: Commit new or updated posts
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Actions"
+          git add content/posts static/img
+          if git diff --cached --quiet; then
+            echo "No new posts."
+          else
+            git commit -m "Sync posts from Notion"
+            git pull --rebase origin main
+            git push origin main
+          fi
