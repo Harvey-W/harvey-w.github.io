@@ -1,0 +1,138 @@
+baseURL: https://harvey-w.github.io/
+languageCode: en-us
+title: Harvey's Blog
+author: Harvey
+description: "A blog about tech, programming, and life."
+theme: ["PaperMod"]
+
+# enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+pygmentsUseClasses: true # for dark mode code highlighting
+# mainsections: ["posts"] # set the main section for homepage
+hasCJKLanguage: true
+
+minify:
+  disableXML: true
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
+
+permalinks: #浏览器链接显示方式
+  post: "/:year/:month/:day/:title/"
+
+menu:
+  main:
+    - identifier: posts
+      name: Posts
+      url: /
+      weight: 1
+    - identifier: categories
+      name: Categories
+      url: /categories/
+      weight: 3
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 2
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 4
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  title: "Harvey's Blog"
+  subtitle: "Tech, Programming, and Life"
+  description: "A blog about tech, programming, and life."
+  keywords: ["blog", "tech", "programming", "life"]
+  author: "Harvey"
+  defaultTheme: auto # light, dark, auto
+  # disableThemeToggle: false
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowCodeCopyButtons: true
+  ShowPageNums: true
+  # ShowRssButtonInSectionTermList: true 在归档页标题旁显示RSS订阅按钮
+  # UseHugoToc: true
+  # showtoc: 文章可以自行配置是否显示目录
+  disableSpecial1stPost: true # 禁用第一个帖子的无卡特殊外观
+  # disableScrollToTop: false # 禁用右下角回到顶部按钮
+  comments: true # 是否启用评论功能
+  
+  terms:
+    category: true
+
+  assets:
+    # disableHLJS: true # to disable highlight.js
+    disableFingerprinting: true
+    favicon: "/favicon_io/favicon.ico" # path to favicon in the "static" folder
+    favicon16x16: "/favicon_io/favicon-16x16.png"
+    favicon32x32: "/favicon_io/favicon-32x32.png"
+    appleTouchIcon: "/favicon_io/apple-touch-icon.png"
+    # safariPinnedTab: "/favicon_io/safari-pinned-tab.svg"
+    siteManifest: "/favicon/site.webmanifest" # path to site manifest in the "static"
+
+  label:
+    icon: "/favicon_io/favicon.ico"
+
+  homeInfoParams:
+    Title: "👋 Welcome to My Blog"
+    Content: >
+      Hi, this is [*Harvey Wang*](/about/).  
+
+      Here you can find articles about thinking, attitude, and life.  
+
+      By documenting, I hope to have a better understanding of myself and the world around me.  
+
+      You can also follow me on my social accounts below.   
+      
+      Enjoy reading! 😊  
+
+  socialIcons:
+    - name: x
+      url: "https://x.com/harveyw93"
+    - name: github
+      url: "https://github.com/Harvey-W"
+    - name: bilibili
+      url: "https://space.bilibili.com/44361902"
+    - name: rss
+      url: "/index.xml"
+
+  analytics: # Google Analytics
+
+  # for search
+  # https://fusejs.io/api/options.html
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
+    keys: ["title", "permalink", "summary", "content", "categories"]
+
+  schema:
+    enable: true
+    type: Blog
+    organization:
+      name: Harvey'Blog
+      url: https://harvey-w.github.io/
+      logo: "/favicon_io/favicon.ico"
+
+  Reward: true #打赏是否开启
+
+taxonomies: # Hugo 默认的分类和标签
+  category: categories
+
+markup:
+  highlight:
+    noClasses: false

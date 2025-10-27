@@ -1,0 +1,5 @@
+/public
+/backup_repo
+.hugo_build.lock
+favicon_io.zip
+*.exe
