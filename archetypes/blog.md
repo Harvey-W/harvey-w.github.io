@@ -12,7 +12,7 @@ categories:[[ range .Categories ]]
 series: [[ range .Properties.Series.MultiSelect ]]
     - "[[ .Name ]]"[[end]]
 draft: false  
-
+[[ .draft ]]
 ---
 [[/* Check machine categories */ -]]
 [[$hackTheBox := 0 -]]
@@ -49,5 +49,6 @@ This machine is currently **active**. Please enter the [[if $windows]]Administra
 [[ else]]
 [[ .Content ]]
 [[ end ]]
+
 
 
