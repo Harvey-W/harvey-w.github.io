@@ -1,4 +1,4 @@
----
+---  
 title: "[[ .Title ]]"  
 description: "[[ .Description ]]"  
 cover:  
@@ -6,13 +6,13 @@ cover:
 date: [[ .CreationDate.Format "2006-01-02T15:04:05+07:00" ]]  
 lastmod: [[ .LastModified.Format "2006-01-02T15:04:05+07:00" ]]  
 tags:[[ range .Tags ]]
-    - "[[ .Name ]]"[[end]]
+    - "[[ .Name ]]"[[end]]  
 categories:[[ range .Categories ]]
-    - "[[ .Name ]]"[[end]]
+    - "[[ .Name ]]"[[end]]  
 series: [[ range .Properties.Series.MultiSelect ]]
-    - "[[ .Name ]]"[[end]]
-draft: false  
-[[ .draft ]]
+    - "[[ .Name ]]"[[end]]  
+draft: [[ .draft ]]  
+
 ---
 [[/* Check machine categories */ -]]
 [[$hackTheBox := 0 -]]
@@ -49,6 +49,7 @@ This machine is currently **active**. Please enter the [[if $windows]]Administra
 [[ else]]
 [[ .Content ]]
 [[ end ]]
+
 
 
 
