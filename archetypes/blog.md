@@ -11,7 +11,7 @@ categories:[[ range .Categories ]]
     - "[[ .Name ]]"[[end]]  
 series: [[ range .Properties.Series.MultiSelect ]]
     - "[[ .Name ]]"[[end]]  
-draft: [[ .draft ]]  
+draft: false  
 
 ---
 [[/* Check machine categories */ -]]
@@ -49,6 +49,7 @@ This machine is currently **active**. Please enter the [[if $windows]]Administra
 [[ else]]
 [[ .Content ]]
 [[ end ]]
+
 
 
 
