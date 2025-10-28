@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "content/**"
+      - "static/**"
   workflow_dispatch:
     # manual run
     inputs:
