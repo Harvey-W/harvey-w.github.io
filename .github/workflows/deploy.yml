@@ -2,6 +2,8 @@ name: Deploy Hugo PaperMod Demo to Pages
 
 on:
   push:
+    branches:
+      - master
     paths:
       - "content/**"
       - "static/**"
