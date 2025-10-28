@@ -7,10 +7,6 @@ on:
     paths:
       - "content/**"
       - "static/**"
-  pull_request:
-    paths:
-      - "content/**"
-      - "static/**"
   workflow_dispatch:
     # manual run
     inputs:
