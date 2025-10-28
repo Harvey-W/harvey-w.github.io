@@ -47,17 +47,24 @@ jobs:
           use-shortcodes: true
         env:
           NOTION_SECRET: ${{ secrets.NOTION_SECRET }}
-          NOTION_TOKEN: ${{ secrets.NOTION_SECRET }}
 
       - name: Commit new or updated posts
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Actions"
           git add content/posts static/img
+          
           if git diff --cached --quiet; then
             echo "No new posts."
           else
             git commit -m "Sync posts from Notion"
-            git pull --rebase origin main
-            git push origin main
+          
+            # 尝试拉取最新分支
+            if git pull --rebase origin main; then
+              git push origin main
+            else
+              echo "⚠️ Merge conflict detected, skipping push to avoid overwrite."
+              git rebase --abort || true
+            fi
           fi
+
