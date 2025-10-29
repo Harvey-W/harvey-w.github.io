@@ -15,6 +15,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.GH_PAT_FOR_ACTIONS }}
           submodules: true
           fetch-depth: 0
 
@@ -66,5 +67,7 @@ jobs:
               echo "⚠️ Merge conflict detected, skipping push to avoid overwrite."
               git rebase --abort || true
             fi
-          fi 
+          fi
+          env:
+            GIT_TOKEN: ${{ secrets.GH_PAT_FOR_ACTIONS }}
 
