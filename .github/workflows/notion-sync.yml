@@ -68,6 +68,6 @@ jobs:
               git rebase --abort || true
             fi
           fi
-          env:
-            GIT_TOKEN: ${{ secrets.GH_PAT_FOR_ACTIONS }}
+        env:
+          GIT_TOKEN: ${{ secrets.GH_PAT_FOR_ACTIONS }}
 
