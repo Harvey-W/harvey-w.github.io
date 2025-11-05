@@ -53,14 +53,34 @@ jobs:
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Actions"
+      
+          # 添加所有变化，包括新增、修改、删除
           git add -A content/posts static/img
-          
+      
+          # 检查是否有实际变更
           if git diff --cached --quiet; then
-            echo "No new or deleted posts."
+            echo "No new, updated, or deleted posts."
           else
-            git commit -m "Sync posts from Notion (add/update/delete)"
-          
-            # 尝试拉取最新分支
+            # 统计不同类型的变更
+            added=$(git diff --cached --name-status | grep "^A" | wc -l || true)
+            modified=$(git diff --cached --name-status | grep "^M" | wc -l || true)
+            deleted=$(git diff --cached --name-status | grep "^D" | wc -l || true)
+            changed_files=$(git diff --cached --name-only | tr '\n' ',' | sed 's/,$//')
+      
+            # 构造 commit message
+            commit_msg="🪶 Sync from Notion:"
+            [ "$added" -gt 0 ] && commit_msg="$commit_msg ${added} added"
+            [ "$modified" -gt 0 ] && commit_msg="$commit_msg, ${modified} updated"
+            [ "$deleted" -gt 0 ] && commit_msg="$commit_msg, ${deleted} deleted"
+      
+            if [ -n "$changed_files" ]; then
+              commit_msg="$commit_msg\nChanged files: ${changed_files}"
+            fi
+      
+            # 提交变更
+            git commit --allow-empty-message -m "🪶 Auto-sync: $(date '+%Y-%m-%d %H:%M')"
+      
+            # 尝试同步主分支
             if git pull --rebase origin main; then
               git push origin main
             else
@@ -68,6 +88,3 @@ jobs:
               git rebase --abort || true
             fi
           fi
-        env:
-          GIT_TOKEN: ${{ secrets.GH_PAT_FOR_ACTIONS }}
-
