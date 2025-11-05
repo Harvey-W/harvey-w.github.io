@@ -53,12 +53,12 @@ jobs:
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Actions"
-          git add content/posts static/img
+          git add -A content/posts static/img
           
           if git diff --cached --quiet; then
-            echo "No new posts."
+            echo "No new or deleted posts."
           else
-            git commit -m "Sync posts from Notion"
+            git commit -m "Sync posts from Notion (add/update/delete)"
           
             # 尝试拉取最新分支
             if git pull --rebase origin main; then
