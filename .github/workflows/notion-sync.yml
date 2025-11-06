@@ -78,7 +78,7 @@ jobs:
             fi
       
             # 提交变更
-            git commit --allow-empty-message -m "🪶 Auto-sync: $(date '+%Y-%m-%d %H:%M')"
+            git commit -m "$commit_msg"
       
             # 尝试同步主分支
             if git pull --rebase origin main; then
