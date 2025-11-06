@@ -44,7 +44,7 @@ jobs:
           filter-prop: 'Status'
           filter-value: "Finished,Published"
           published-value: 'Published'
-          use-date-for-filename: false
+          use-date-for-filename: true
           use-shortcodes: true
         env:
           NOTION_SECRET: ${{ secrets.NOTION_SECRET }}
