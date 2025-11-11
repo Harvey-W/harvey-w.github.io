@@ -17,6 +17,7 @@ hasCJKLanguage: true
 
 minify:
   disableXML: true
+  disableJS: true
 
 outputs:
   home:
