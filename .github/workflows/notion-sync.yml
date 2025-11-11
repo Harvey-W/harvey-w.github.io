@@ -1,0 +1,90 @@
+name: Sync Posts from Notion
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"   # 每12小时自动运行
+  workflow_dispatch:          # 手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  sync-notion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT_FOR_ACTIONS }}
+          submodules: true
+          fetch-depth: 0
+
+      - name: Verify Notion secret
+        run: |
+          if [ -z "${NOTION_SECRET}" ]; then
+            echo "❌ NOTION_SECRET is missing"
+            exit 1
+          else
+            echo "✅ NOTION_SECRET detected"
+          fi
+        env:
+          NOTION_SECRET: ${{ secrets.NOTION_SECRET }}
+
+      - name: Sync from Notion database
+        uses: Harvey-W/notion-blog@master
+        with:
+          database-id: '28fd66f900a880469866f3c2ce540b14'
+          content-folder: ./content/posts
+          images-folder: ./static/img
+          images-link: /img
+          archetype-file: ./archetypes/blog.md
+          property-description: "Description"
+          property-tags: "Tags"
+          property-categories: "Categories"
+          filter-prop: 'Status'
+          filter-value: "Finished,Published"
+          published-value: 'Published'
+          use-date-for-filename: true
+          use-shortcodes: true
+        env:
+          NOTION_SECRET: ${{ secrets.NOTION_SECRET }}
+
+      - name: Commit new or updated posts
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Actions"
+      
+          # 添加所有变化，包括新增、修改、删除
+          git add -A content/posts static/img
+      
+          # 检查是否有实际变更
+          if git diff --cached --quiet; then
+            echo "No new, updated, or deleted posts."
+          else
+            # 统计不同类型的变更
+            added=$(git diff --cached --name-status | grep "^A" | wc -l || true)
+            modified=$(git diff --cached --name-status | grep "^M" | wc -l || true)
+            deleted=$(git diff --cached --name-status | grep "^D" | wc -l || true)
+            changed_files=$(git diff --cached --name-only | tr '\n' ',' | sed 's/,$//')
+      
+            # 构造 commit message
+            commit_msg="🪶 Sync from Notion:"
+            [ "$added" -gt 0 ] && commit_msg="$commit_msg ${added} added"
+            [ "$modified" -gt 0 ] && commit_msg="$commit_msg, ${modified} updated"
+            [ "$deleted" -gt 0 ] && commit_msg="$commit_msg, ${deleted} deleted"
+      
+            if [ -n "$changed_files" ]; then
+              commit_msg="$commit_msg\nChanged files: ${changed_files}"
+            fi
+      
+            # 提交变更
+            git commit -m "$commit_msg"
+      
+            # 尝试同步主分支
+            if git pull --rebase origin main; then
+              git push origin main
+            else
+              echo "⚠️ Merge conflict detected, skipping push to avoid overwrite."
+              git rebase --abort || true
+            fi
+          fi
