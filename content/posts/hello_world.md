@@ -1,15 +1,27 @@
 ---
-date: '2025-09-25T19:57:40+08:00'
-draft: true
+date: '2025-10-06T19:57:40+08:00'
+draft: false
 title: 'Hello_world'
 cover: 
     image: "/img/hello_world.png"
     #relative: true
     hidden: false
 ---
-Special thanks to John Schulman for a lot of super valuable feedback and direct edits on this post.
 
-Test time compute (Graves et al. 2016, Ling, et al. 2017, Cobbe et al. 2021) and Chain-of-thought (CoT) (Wei et al. 2022, Nye et al. 2021), have led to significant improvements in model performance, while raising many research questions. This post aims to review recent developments in how to effectively use test-time compute (i.e. “thinking time”) and why it helps.
+> 诗人说的那个闷热令人疲倦的正午，又差我几载。在这几年里，我随心所欲过也踟蹰不前过，又恐是想得太多记录的太少，只怕那陌生人提着满篮奇妙货物，对于我来说却是无法惊醒的朦胧。所以我想我不该再沉浸自研，我多变的触角迫不及待地要伸向世界——而世界上每一块普通的角落，或许正在等待着我去孕育伟大和独特。
+这个博客将是第一声啼哭。
+又有谁知，我将以何面目走出房门，坦然接受命运的安排呢。  
+（上一个Blog的开篇语）
+> 
 
-# Motivation
-Enabling models to think for longer can be motivated in a few different ways.
+几年前我曾经搭建过一个静态Blog，作为indie hacker写技术文章的地方，也是一个和世界交互的窗口。谁知甫一建好便随着入职工作而废弃了。
+
+近些年随着社交媒体的泛娱乐化，我越发地不喜欢在社媒上发表任何意见。而且由于世界格局的集体右转，言论管制的疯狂程度让人更加难以忍受。
+
+但是我还是有难以抑制的书写冲动。李小龙说过：”Be water, my friend“，当接收了外界的输入，积累、思考和内化后以求得输出，似乎就是这样的一种追求。人应该作为流动的个体，才能无常形、驭万物、舍分别心。
+
+有时总是想起各个时期写过的作品，我觉得那里面有一部分的自我，是内省的自我、外化的自我，也是二十岁观十岁，三十岁再观二十岁，惟觉会无休止重复下去的自我。
+
+当我失去书写的时候，生活也被我过成了一潭死水。每天面对的伟大与渺小，逐渐让我的自我失去平衡。就在这时，我想起还有这样一个自留地，似乎是不用考虑被关注，也不用考虑被束缚。只要技术上的修修补补，又可以敞开心扉，落下笔触。
+
+Too old to be simple, sometimes to lost naive. 想得太多了，开始书写吧。
