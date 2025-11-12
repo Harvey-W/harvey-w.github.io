@@ -2,7 +2,7 @@
 title: "Hello World"  
 description: ""  
 cover:  
-  image: ""  
+  image: "/img/prod-files-secure.s3.us-west-2.amazonaws.com_IMG_9723.jpeg"  
 date: 2025-10-06T11:39:00+07:00  
 lastmod: 2025-11-12T15:28:00+07:00  
 notion_id: "2a3d66f9-00a8-80b7-b50a-dddfcd5afc24"  
@@ -30,9 +30,8 @@ draft: false
 
 当我失去书写的时候，生活也被我过成了一潭死水。每天面对的伟大与渺小，逐渐让我的自我失去平衡。就在这时，我想起还有这样一个自留地，似乎是不用考虑被关注，也不用考虑被束缚。只要技术上的修修补补，又可以敞开心扉，落下笔触。
 
-![](/img/prod-files-secure.s3.us-west-2.amazonaws.com_IMG_9723.jpeg)
-
 Too old to be simple, sometimes to lost naive. 想得太多了，开始书写吧。
+
 
 
 
