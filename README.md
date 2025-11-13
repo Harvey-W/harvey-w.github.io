@@ -18,6 +18,9 @@ https://developers.notion.com/reference/webhooks-events-delivery#event-propertie
 
 ### TODO:  
 - [x] Github Actions 自动部署  
-- [x] Notion Integrations CMS  
+- [x] Notion Integrations CMS
+- [ ] CSS Personalized
+  - [ ] [Cover侧移](https://cloud.tencent.com/developer/article/1969889)
+  - [ ] [ToC侧移](https://cloud.tencent.com/developer/article/1944127)
 - [ ] Comments 
 - [ ] Google Analytics 站点统计  
